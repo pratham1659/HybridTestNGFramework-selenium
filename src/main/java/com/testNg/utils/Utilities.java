@@ -42,8 +42,7 @@ public class Utilities {
 	}
 
 	public static Object[][] getTestDataFromExcel(String sheetName) {
-		File excelFile = new File(System.getProperty("user.dir")
-				+ "\\src\\main\\java\\com\\tutorialsninja\\qa\\testdata\\TutorialsNinjaTestData.xlsx");
+		File excelFile = new File("./src/main/java/com/testNg/testdata/HybridTestData.xlsx");
 		XSSFWorkbook workbook = null;
 		try {
 			FileInputStream fisExcel = new FileInputStream(excelFile);

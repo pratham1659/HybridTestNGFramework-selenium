@@ -29,19 +29,20 @@ public class RegisterPage extends TestBase {
 	@Test(priority = 1)
 	public void verifyRegisteringAccountWithMandatoryFeilds() throws InterruptedException {
 
-		driver.findElement(By.name("firstname")).sendKeys("Ankita");
-		driver.findElement(By.name("lastname")).sendKeys("Kumari");
+		driver.findElement(By.name("firstname")).sendKeys(dataProp.getProperty("firstname"));
+		driver.findElement(By.name("lastname")).sendKeys(dataProp.getProperty("lastName"));
 		driver.findElement(By.id("input-email")).sendKeys(Utilities.generateEmailWithTimeStamp());
-		driver.findElement(By.id("input-telephone")).sendKeys("9508683080");
+		driver.findElement(By.id("input-telephone")).sendKeys(dataProp.getProperty("telephone"));
 
-		driver.findElement(By.id("input-password")).sendKeys(prop.getProperty("password"));
-		driver.findElement(By.id("input-confirm")).sendKeys(prop.getProperty("password"));
+		driver.findElement(By.id("input-password")).sendKeys(dataProp.getProperty("password"));
+		driver.findElement(By.id("input-confirm")).sendKeys(dataProp.getProperty("password"));
 		driver.findElement(By.xpath("//input[@name='newsletter' and @type='radio' and @value=1]")).click();
 		driver.findElement(By.name("agree")).click();
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
+		
 
 		String actualHeading = driver.findElement(By.xpath("//div[@id='content']/h1")).getText();
-		Assert.assertEquals(actualHeading, "Your Account Has Been Created!");
+		Assert.assertEquals(actualHeading, dataProp.getProperty("accountCreated"));
 	}
 
 	@Test(priority = 2)
@@ -50,11 +51,11 @@ public class RegisterPage extends TestBase {
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 		String actualPrivacyPolicy = driver.findElement(By.xpath("//div[contains(@class,'alert-dismissible')]"))
 				.getText();
-		Assert.assertEquals(actualPrivacyPolicy, "Warning: You must agree to the Privacy Policy!");
+		Assert.assertEquals(actualPrivacyPolicy, dataProp.getProperty("privacyPolicy"));
 		String actualFirstNameWarning = driver
 				.findElement(By.xpath("//div[contains(text(),'First Name must be between 1 and 32 characters!')]"))
 				.getText();
-		Assert.assertEquals(actualFirstNameWarning, "First Name must be between 1 and 32 characters!");
+		Assert.assertEquals(actualFirstNameWarning, dataProp.getProperty("firstNameWarning"));
 	}
 
 	@AfterMethod

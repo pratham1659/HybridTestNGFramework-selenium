@@ -28,8 +28,13 @@ public class TestBase {
 
 		try {
 			prop = new Properties();
-			FileInputStream ip = new FileInputStream("./src/main/java/com/testNg/config/config.properties");
-			prop.load(ip);
+			FileInputStream fis1 = new FileInputStream("./src/main/java/com/testNg/config/config.properties");
+			prop.load(fis1);
+
+			dataProp = new Properties();
+			FileInputStream dataFis = new FileInputStream("./src/main/java/com/testNg/testdata/testdata.properties");
+			dataProp.load(dataFis);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -38,7 +43,7 @@ public class TestBase {
 	}
 
 	public WebDriver initializeBrowser() {
-		
+
 		String browserName = prop.getProperty("browser");
 		String myUrl = prop.getProperty("url");
 

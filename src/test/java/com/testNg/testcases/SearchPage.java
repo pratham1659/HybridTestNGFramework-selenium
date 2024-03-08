@@ -31,7 +31,7 @@ public class SearchPage extends TestBase {
 
 		String availProduct = driver.findElement(By.xpath("//h1[contains(text(),'HP LP3065')]")).getText();
 
-		Assert.assertEquals(availProduct, "HP LP3065", "Product Available");
+		Assert.assertEquals(availProduct, dataProp.getProperty("productName1"), "Product Available");
 	}
 
 	@Test(priority = 2)
@@ -43,8 +43,8 @@ public class SearchPage extends TestBase {
 				.findElement(By.xpath("//p[contains(text(),'There is no product that matches the search criter')]"))
 				.getText();
 
-		Assert.assertEquals(noProductString, "There is no product that matches the search criteria.",
-				"No Product in search List");
+		Assert.assertEquals(noProductString, dataProp.getProperty("noProductMatch"),
+				dataProp.getProperty("noProductMatch"));
 
 	}
 
@@ -58,8 +58,8 @@ public class SearchPage extends TestBase {
 				.findElement(By.xpath("//p[contains(text(),'There is no product that matches the search criter')]"))
 				.getText();
 
-		Assert.assertEquals(noProductString, "There is no product that matches the search criteria.",
-				"No Product in search List");
+		Assert.assertEquals(noProductString, dataProp.getProperty("noProductMatch"),
+				dataProp.getProperty("noProductMatch"));
 
 	}
 
