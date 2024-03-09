@@ -9,11 +9,11 @@ import org.testng.Assert;
 
 import com.testNg.base.TestBase;
 
-public class SearchPage extends TestBase {
+public class SearchTest extends TestBase {
 
 	WebDriver driver;
 
-	public SearchPage() {
+	public SearchTest() {
 		super();
 	}
 
