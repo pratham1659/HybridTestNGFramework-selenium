@@ -25,7 +25,7 @@ public class Utilities {
 		String timeStamp = date.toString().replace(" ", "_").replace(":", "_");
 		return "pratham" + timeStamp + "@gmail.com";
 	}
-	
+
 
 	public static String captureScreenshot(WebDriver driver, String testName) {
 

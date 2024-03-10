@@ -3,15 +3,13 @@
 <suite name="Failed suite [Hybrid TestNGFramework]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="TestNg Framework(failed)">
     <classes>
-      <class name="com.testNg.testcases.SearchPage">
+      <class name="com.testNg.testcases.LoginTest">
         <methods>
-          <include name="verifySearchWithoutAnyProduct"/>
+          <include name="verifyLoginWithInValidCredentials" invocation-numbers="1"/>
           <include name="setUp"/>
-          <include name="verifySearchWithInvalidProduct"/>
-          <include name="verifySearchWithValidProduct"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- com.testNg.testcases.SearchPage -->
+      </class> <!-- com.testNg.testcases.LoginTest -->
     </classes>
   </test> <!-- TestNg Framework(failed) -->
 </suite> <!-- Failed suite [Hybrid TestNGFramework] -->

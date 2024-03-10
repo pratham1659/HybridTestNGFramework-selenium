@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.testNg.base.TestBase;
-import com.testNg.pages.AccountSuccess;
+import com.testNg.pages.AccountSuccessPage;
 import com.testNg.pages.HomePage;
 import com.testNg.pages.RegisterPage;
 import com.testNg.utils.Utilities;
@@ -15,6 +15,9 @@ import com.testNg.utils.Utilities;
 public class RegisterTest extends TestBase {
 
 	WebDriver driver;
+	HomePage homePage;
+	RegisterPage registerPage;
+	AccountSuccessPage accountSuccessPage;
 
 	public RegisterTest() {
 		super();
@@ -23,46 +26,33 @@ public class RegisterTest extends TestBase {
 	@BeforeMethod
 	public void setUp() {
 		driver = initializeBrowser();
-		HomePage homePage = new HomePage(driver);
-		homePage.clickOnMyAccountDropMenu();
-		homePage.selectRegisterOption();
+		homePage = new HomePage(driver);
+		registerPage = homePage.navigateToRegisterPage();
 
 	}
 
 	@Test(priority = 1)
 	public void verifyRegisteringAccountWithMandatoryFeilds() throws InterruptedException {
-		
-		RegisterPage registerPage = new RegisterPage(driver);
-		registerPage.enterFirstName(dataProp.getProperty("firstname"));
-		registerPage.entertLastName(dataProp.getProperty("lastName"));
-		registerPage.enterEmailAddress(Utilities.generateEmailWithTimeStamp());
-		registerPage.enterTelephone(dataProp.getProperty("telephone"));
-		registerPage.enterPassword(dataProp.getProperty("password"));
-		registerPage.enterConfirmPassword(dataProp.getProperty("password"));
-		registerPage.selectRadioBtn();
-		registerPage.selectPrivacyPolicyButton();
-		registerPage.clickSubmitBtn();
-		
 
-		AccountSuccess accountSuccess = new AccountSuccess(driver);
-		
-		String actualHeading = accountSuccess.accountSuccesPageHeadingStatus();
-		Assert.assertEquals(actualHeading, dataProp.getProperty("accountCreated"));
+		accountSuccessPage = registerPage.registerWithMandatoryFields(dataProp.getProperty("firstName"),
+				dataProp.getProperty("lastName"), Utilities.generateEmailWithTimeStamp(),
+				dataProp.getProperty("telephoneNumber"), dataProp.getProperty("validPassword"));
+
+		String actualHeading = accountSuccessPage.accountSuccesPageHeadingStatus();
+		Assert.assertEquals(actualHeading, dataProp.getProperty("accountSuccessfullyCreated"), "Account Success page is not displayed");
+
 	}
 
 	@Test(priority = 2)
 	public void verifyRegisteringAccountWithoutFillingAnyDetails() {
 
-		RegisterPage registerPage = new RegisterPage(driver);
-		registerPage.clickSubmitBtn();
-		
-		AccountSuccess accountSuccess = new AccountSuccess(driver);
-		
-		String actualPrivacyPolicy = accountSuccess.invalidRegisterAlert();
-		Assert.assertEquals(actualPrivacyPolicy, dataProp.getProperty("privacyPolicy"));
-		String actualFirstNameWarning = accountSuccess.firstNameAlert();
-				
-		Assert.assertEquals(actualFirstNameWarning, dataProp.getProperty("firstNameWarning"));
+		registerPage.clickOnContinueButton();
+
+		Assert.assertTrue(registerPage.displayStatusOfWarningMessages(dataProp.getProperty("privacyPolicyWarning"),
+				dataProp.getProperty("firstNameWarning"), dataProp.getProperty("lastNameWarning"),
+				dataProp.getProperty("emailWarning"), dataProp.getProperty("telephoneWarning"),
+				dataProp.getProperty("passwordWarning")));
+
 	}
 
 	@AfterMethod

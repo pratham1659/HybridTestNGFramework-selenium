@@ -3,9 +3,9 @@
 <suite name="Hybrid TestNGFramework">
   <test name="TestNg Framework">
     <classes>
-      <class name="com.testNg.testcases.RegisterPage"/>
-      <class name="com.testNg.testcases.LoginPage"/>
-      <class name="com.testNg.testcases.SearchPage"/>
+      <class name="com.testNg.testcases.RegisterTest"/>
+      <class name="com.testNg.testcases.LoginTest"/>
+      <class name="com.testNg.testcases.SearchTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
