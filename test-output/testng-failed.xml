@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.testNg.testcases.RegisterTest">
+      <class name="com.test.testcases.RegisterTest">
         <methods>
-          <include name="verifyRegisteringAccountWithMandatoryFeilds"/>
           <include name="setUp"/>
           <include name="tearDown"/>
+          <include name="verifyRegisteringAccountWithMandatoryFeilds"/>
         </methods>
-      </class> <!-- com.testNg.testcases.RegisterTest -->
+      </class> <!-- com.test.testcases.RegisterTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
