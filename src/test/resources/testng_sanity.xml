@@ -3,8 +3,8 @@
 <suite name="Suite">
 
 	<listeners>
-		<listener
-			class-name="com.qa.report.ReportGenerator" />
+		<listener class-name="com.qa.report.ReportGenerator" />
+		<listener class-name="com.qa.report.MyAnnotationTransformer"/>
 	</listeners>
 
 	<test thread-count="5" name="Test">

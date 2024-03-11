@@ -20,11 +20,27 @@ public class ReportGenerator implements ITestListener {
 	ExtentReports extentReport;
 	Object object;
 	ExtentTest extentTest;
-
+	
 	public ReportGenerator() {
+		extentReport = new ExtentReports();
+		object = extentReport;
 		
 	}
+
+	public void testName(String testName) {
+		extentTest = ((ExtentReports) object).createTest(testName);
+	}
+
+	public void logsInfo(String log) {
+		extentTest.log(Status.INFO, log);
+	}
 	
+
+	// Method to get the ExtentTest object
+	public ExtentTest getExtentTest() {
+		return extentTest;
+	}
+
 	@Override
 	public void onStart(ITestContext context) {
 
@@ -82,7 +98,6 @@ public class ReportGenerator implements ITestListener {
 
 		String pathOfExtentReport = System.getProperty("user.dir") + "/test-output/ExtentReports/extentReport.html";
 		File extentReport = new File(pathOfExtentReport);
-
 
 		try {
 			Desktop.getDesktop().browse(extentReport.toURI());
