@@ -46,6 +46,7 @@ public class TestUtils {
 
 		return destinationScreenshotPath;
 	}
+	
 
 	public static Object[][] getTestDataFromExcel(String sheetName) {
 		File excelFile = new File("./src/main/java/com/qa/testdata/HybridTestData.xlsx");

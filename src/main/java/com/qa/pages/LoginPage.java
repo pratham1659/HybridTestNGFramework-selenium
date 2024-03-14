@@ -23,6 +23,29 @@ public class LoginPage {
 
 	@FindBy(xpath = "//div[contains(@class,'alert-dismissible')]")
 	private WebElement loginCheckInvalid;
+	
+	
+	//Selenium Specific Data
+	@FindBy(xpath = "//input[@name='firstName']")
+	WebElement firstNameFeild;
+
+	@FindBy(xpath = "//input[@name='lastName']")
+	WebElement lastNameFeild;
+
+	@FindBy(xpath = "//input[@name='username']")
+	WebElement userNameFeild;
+
+	@FindBy(xpath = "//input[@name='email']")
+	WebElement emailNameFeild;
+
+	@FindBy(xpath = "//input[@name='dob']")
+	WebElement dateOfBirthFeild;
+
+	@FindBy(xpath = "//input[@name='contact']")
+	WebElement contactFeild;
+	
+	
+	
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -58,6 +81,17 @@ public class LoginPage {
 
 	public String checkInvalidLoginStatus() {
 		return loginCheckInvalid.getText();
+	}
+	
+	//Selenium Specific Data
+	public void ContactFormTest(String firstName, String lastName, String userName, String email, String dob,
+			String contact) {
+		firstNameFeild.sendKeys(firstName);
+		lastNameFeild.sendKeys(lastName);
+		userNameFeild.sendKeys(userName);
+		emailNameFeild.sendKeys(email);
+		dateOfBirthFeild.sendKeys(dob);
+		contactFeild.sendKeys(contact);
 	}
 
 }

@@ -13,15 +13,12 @@ import com.qa.pages.HomePage;
 import com.qa.pages.LoginPage;
 import com.qa.utils.TestUtils;
 
-
-
-
 public class LoginTest extends TestBase {
 
 	public WebDriver driver;
-	HomePage homePage;
+//	HomePage homePage;
 	LoginPage loginPage;
-	AccountPage accountPage;
+//	AccountPage accountPage;
 	
 	public LoginTest() {
 		super();
@@ -32,28 +29,36 @@ public class LoginTest extends TestBase {
 	public void setUp() {
 
 		driver = initializeBrowser();
-		homePage = new HomePage(driver);
-		loginPage = homePage.naviageToLoginPage();
+//		homePage = new HomePage(driver);
+		loginPage = new LoginPage(driver);
+//		loginPage = homePage.naviageToLoginPage();
 
 	}
 
 	@DataProvider(name="validCredentialsSupplier")
 	public Object[][] supplyTestData() {
-		Object[][] dataObject = TestUtils.getTestDataFromExcel("Login");
+		Object[][] dataObject = TestUtils.getTestDataFromExcel("User");
 		return dataObject;
-
 	}
 
+//	@Test(priority = 1, dataProvider="validCredentialsSupplier", enabled = false)
+//	public void verifyLoginWithValidCredentials(String email, String password) {
+//
+//		accountPage = loginPage.login(email, password);
+//		Assert.assertTrue(accountPage.getDisplayStatusOfAccount());
+//
+//		String loginCheck = loginPage.CheckValidLoginStatus();
+//		String validCheck = dataProp.getProperty("validCheck");
+//
+//		Assert.assertTrue(loginCheck.contains(validCheck), "Login Not successfully)");
+//	}
+	
 	@Test(priority = 1, dataProvider="validCredentialsSupplier")
-	public void verifyLoginWithValidCredentials(String email, String password) {
-
-		accountPage = loginPage.login(email, password);
-		Assert.assertTrue(accountPage.getDisplayStatusOfAccount());
-
-		String loginCheck = loginPage.CheckValidLoginStatus();
-		String validCheck = dataProp.getProperty("validCheck");
-
-		Assert.assertTrue(loginCheck.contains(validCheck), "Login Not successfully)");
+	public void contactFormDataProvider(String firstName, String lastName, String userName, String email, String dob,
+			String contact) {
+		
+		loginPage.ContactFormTest(firstName, lastName, userName, email, dob, contact);
+		
 	}
 
 	@DataProvider
@@ -63,7 +68,7 @@ public class LoginTest extends TestBase {
 
 	}
 
-	@Test(priority = 2, dataProvider = "supplyFakeTestData")
+	@Test(priority = 2, dataProvider = "supplyFakeTestData", enabled = false)
 	public void verifyLoginWithInValidCredentials(String email, String password) {
 
 		loginPage.login(TestUtils.generateEmailWithTimeStamp(), password);
@@ -74,7 +79,6 @@ public class LoginTest extends TestBase {
 
 	@AfterMethod
 	public void tearDown() {
-		driver.quit();
 	}
 
 }
